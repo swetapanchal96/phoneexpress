@@ -1,0 +1,112 @@
+:root{
+  --orange: #f28a00;
+  --blue: #00a6d6;
+  --charcoal: #24313a;
+  --gold: #d89b00;
+  --light: #f7fafc;
+  --glass: rgba(255,255,255,0.6);
+  --transition: 300ms cubic-bezier(.2,.9,.3,1);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+body { color: var(--charcoal); background: var(--light); }
+
+/* Header */
+.navbar-brand .brand-text { font-weight:700; color:var(--charcoal); }
+.logo-img { border-radius:8px; object-fit:cover; }
+
+/* Hero styles */
+.hero-swiper { padding: 1rem 0 2rem; }
+.hero-image-modern {
+  position: relative;
+  overflow: visible;
+  border-radius: 1rem;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  background: linear-gradient(180deg, rgba(2,6,23,0.02), rgba(0,0,0,0.02));
+}
+.hero-image-modern img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius: 1rem;
+  transform-origin: center;
+  transition: transform var(--transition), filter var(--transition);
+  box-shadow: 0 20px 40px rgba(10,20,30,0.12);
+}
+
+/* Modern hover effect: blend + tilt + mask */
+.hero-image-modern::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background: radial-gradient(600px 200px at 10% 20%, rgba(242,138,0,0.12), transparent 25%),
+              radial-gradient(400px 140px at 90% 80%, rgba(0,166,214,0.10), transparent 25%);
+  transition: opacity 300ms;
+}
+.hero-image-modern .hero-badge {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  background: rgba(255,255,255,0.95);
+  color: var(--charcoal);
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  font-weight:600;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* Right badge */
+.hero-image-modern .hero-badge-right {
+  left: auto;
+  right: 16px;
+  top: 16px;
+}
+
+/* tilt effect when hovering parent */
+.hero-image-modern:hover img,
+.hero-image-modern:focus-within img {
+  transform: perspective(900px) rotateY(-6deg) rotateX(3deg) scale(1.02);
+  filter: saturate(1.06) contrast(1.02);
+}
+.hero-image-modern:hover::before { opacity: 1; }
+
+/* kicker badges */
+.kicker .badge { font-weight:600; }
+
+/* step cards */
+.step-card { border-radius: 12px; background: linear-gradient(180deg,#fff,#fbfdff); transition: transform var(--transition), box-shadow var(--transition); }
+.step-card:hover { transform: translateY(-8px); box-shadow: 0 18px 30px rgba(10,20,30,0.08); }
+.step-num { width:48px; height:48px; border-radius:50%; background: linear-gradient(135deg,var(--blue),var(--orange)); color:white; display:inline-flex; align-items:center; justify-content:center; font-weight:700; }
+
+/* device cards */
+.device-card { border-radius:10px; background: linear-gradient(90deg,#fff,#fbfdff); padding:12px; border:1px solid rgba(36,49,58,0.04); text-align:center; font-weight:600; color:var(--charcoal); box-shadow: 0 6px 18px rgba(36,49,58,0.04); }
+
+/* small UI */
+.icon-round { width:46px; height:46px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; font-size:18px; }
+
+/* CTA final */
+.cta-final { border-top-left-radius: 12px; border-top-right-radius: 12px; }
+
+/* Testimonials blockquote */
+blockquote { border-left: 4px solid rgba(0,0,0,0.06); }
+
+/* form feedback */
+form .invalid-feedback { display:block; }
+
+/* Responsive tweaks */
+@media (max-width: 991px) {
+  .hero-image-modern { height: 260px; }
+}
+
+/* animate-in small fade */
+.fade-in-up { transform: translateY(10px); opacity: 0; transition: transform 500ms ease, opacity 500ms ease; }
+.fade-in-up.visible { transform: translateY(0); opacity:1; }
+
+/* small utility */
+.btn-primary { background: linear-gradient(90deg,var(--blue),var(--orange)); border:0; box-shadow: 0 8px 20px rgba(36,49,58,0.10); }
