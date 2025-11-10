@@ -1,41 +1,73 @@
 // app/components/Testimonials.tsx
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, A11y } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import SectionHeading from './SectionHeading';
 import { FaCheckCircle } from 'react-icons/fa';
+import axios from 'axios';
+import { apiUrl } from '@/config';
 
-type T = { initials: string; name: string; city: string; text: string };
+type Testimonial = {
+  id: number;
+  name: string;
+  designation: string | null;
+  city: string | null;
+  Title: string | null;
+};
 
-const items: T[] = [
-  {
-    initials: 'SM',
-    name: 'Sarah M.',
-    city: 'Sydney',
-    text:
-      'I sold my old iPhone and got paid instantly. The process was so simple and hassle-free. Highly recommend PhoneXpress!',
-  },
-  {
-    initials: 'SM',
-    name: 'James T.',
-    city: 'Melbourne',
-    text:
-      'Best price offered for my broken Samsung. They arranged pickup from my home. Excellent service!',
-  },
-  {
-    initials: 'SM',
-    name: 'Emily R.',
-    city: 'Brisbane',
-    text:
-      'Sold multiple devices at once and got a great deal. The team was professional and payment was immediate.',
-  },
-];
+// type T = { initials: string; name: string; city: string; text: string };
+
+// const items: T[] = [
+//   {
+//     initials: 'SM',
+//     name: 'Sarah M.',
+//     city: 'Sydney',
+//     text:
+//       'I sold my old iPhone and got paid instantly. The process was so simple and hassle-free. Highly recommend PhoneXpress!',
+//   },
+//   {
+//     initials: 'SM',
+//     name: 'James T.',
+//     city: 'Melbourne',
+//     text:
+//       'Best price offered for my broken Samsung. They arranged pickup from my home. Excellent service!',
+//   },
+//   {
+//     initials: 'SM',
+//     name: 'Emily R.',
+//     city: 'Brisbane',
+//     text:
+//       'Sold multiple devices at once and got a great deal. The team was professional and payment was immediate.',
+//   },
+// ];
 
 export default function Testimonials() {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const res = await axios.post(`${apiUrl}/testimoniallist`);
+        if (res.data.success && Array.isArray(res.data.data)) {
+          setTestimonials(res.data.data);
+        } else {
+          console.error('Unexpected API response:', res.data);
+        }
+      } catch (error) {
+        console.error('Error fetching testimonials:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTestimonials();
+  }, []);
+
   return (
     <section className="py-20 bg-gray-50">
       {/* Scoped helpers only */}
@@ -72,19 +104,19 @@ export default function Testimonials() {
           }}
           className="pb-8!"
         >
-          {items.map((t) => (
-            <SwiperSlide key={t.name}>
-              <div className="bg-white p-8 rounded-2xl border border-px-orange hover:border-gray-200 shadow-sm hover:shadow-lg transition max-w-md mx-auto text-left">
+          {testimonials.map((t) => (
+            <SwiperSlide key={t.id}>
+              <div className="bg-white p-8 rounded-2xl border border-[#fb923c] hover:border-gray-200 shadow-sm hover:shadow-lg transition max-w-md mx-auto text-left">
                 <div className="flex items-center gap-4 mb-4">
                   <div className="h-14 w-14 rounded-full grad-disc text-white flex items-center justify-center font-semibold text-lg">
-                    {t.initials}
+                    {t.Title}
                   </div>
                   <div className="text-left">
                     <div className="font-semibold text-lg">{t.name}</div>
-                    <div className="text-sm text-gray-500">{t.city}</div>
+                    <div className="text-sm text-gray-500">{t.city || '--'}</div>
                   </div>
                 </div>
-                <p className="text-gray-600 leading-relaxed">"{t.text}"</p>
+                <p className="text-gray-600 leading-relaxed">"{t.designation}"</p>
               </div>
             </SwiperSlide>
           ))}

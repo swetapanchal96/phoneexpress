@@ -27,10 +27,10 @@ export default function SiteFooter() {
         <div>
           <h5 className="text-white font-semibold mb-4">Quick Links</h5>
           <ul className="space-y-2 text-sm">
-            <li><Link href="#home" className="hover:text-[#FF7A2D] transition">Home</Link></li>
-            <li><Link href="#about" className="hover:text-[#FF7A2D] transition">About</Link></li>
-            <li><Link href="#what-we-buy" className="hover:text-[#FF7A2D] transition">What We Buy</Link></li>
-            <li><Link href="#how-it-works" className="hover:text-[#FF7A2D] transition">How It Works</Link></li>
+            <li><Link href="/" className="hover:text-[#FF7A2D] transition">Home</Link></li>
+            <li><Link href="/about" className="hover:text-[#FF7A2D] transition">About</Link></li>
+            <li><Link href="/what-we-buy" className="hover:text-[#FF7A2D] transition">What We Buy</Link></li>
+            <li><Link href="/how-it-works" className="hover:text-[#FF7A2D] transition">How It Works</Link></li>
           </ul>
         </div>
 
@@ -38,8 +38,8 @@ export default function SiteFooter() {
         <div>
           <h5 className="text-white font-semibold mb-4">Support</h5>
           <ul className="space-y-2 text-sm">
-            <li><Link href="#faqs" className="hover:text-[#FF7A2D] transition">FAQs</Link></li>
-            <li><Link href="#contact" className="hover:text-[#FF7A2D] transition">Contact</Link></li>
+            <li><Link href="/faqs" className="hover:text-[#FF7A2D] transition">FAQs</Link></li>
+            <li><Link href="/contact" className="hover:text-[#FF7A2D] transition">Contact</Link></li>
             <li><Link href="/privacy&policy" className="hover:text-[#FF7A2D] transition">Privacy Policy</Link></li>
             <li><Link href="/terms&condition" className="hover:text-[#FF7A2D] transition">Terms &amp; Conditions</Link></li>
           </ul>
