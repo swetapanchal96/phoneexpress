@@ -4,14 +4,18 @@ import { FaTelegramPlane } from "react-icons/fa";
 
 import React, { useState } from 'react';
 import SectionHeading from "./SectionHeading";
+import axios from "axios";
+import { apiUrl } from '@/config';
 
 type FormState = {
   fullName: string;
   email: string;
   phone: string;
   deviceBrand: string;
+  deviceModel: string;
   deviceCondition: '' | 'new' | 'excellent' | 'good' | 'damaged';
-  imei: string;
+  imei_1: string;
+  imei_2: string;
   expectedPrice?: string;
   message?: string;
 };
@@ -22,14 +26,18 @@ const initial: FormState = {
   phone: '',
   deviceBrand: '',
   deviceCondition: '',
-  imei: '',
+  imei_1: '',
+  imei_2: '',
   expectedPrice: '',
   message: '',
+  deviceModel: '',
 };
 
 export default function QuoteForm() {
   const [data, setData] = useState<FormState>(initial);
   const [submitting, setSubmitting] = useState(false);
+  const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+
 
   function onChange<K extends keyof FormState>(key: K, val: FormState[K]) {
     setData((d) => ({ ...d, [key]: val }));
@@ -38,14 +46,55 @@ export default function QuoteForm() {
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitting(true);
+    setMessage(null);
     try {
-      await new Promise((r) => setTimeout(r, 600));
-      alert('Quote request submitted!');
-      setData(initial);
+      const payload = {
+        Customer_name: data.fullName,
+        brand: data.deviceBrand,
+        model:data.deviceModel,
+        Customer_email: data.email,
+        device_condition: data.deviceCondition,
+        Customer_phone: data.phone,
+        imei_1: data.imei_1,
+        imei_2: data.imei_2,
+        expected_amt: data.expectedPrice,
+        message: data.message,
+      }
+
+      const response = await axios.post(`${apiUrl}/Customer_inquiry`, payload, {
+        headers: {
+          "Content-Type": "application/json"
+        },
+      });
+
+      if (response.data.success) {
+        // alert(response.data.message);
+        setMessage({ type: "success", text: response.data.message });
+        setData(initial);
+      } else {
+        // alert("Something went wrong. Please try again.")
+        setMessage({ type: "error", text: "Something went wrong. Please try again." });
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setMessage({
+        type: "error",
+        text: "Failed to submit inquiry. Please check your network and try again.",
+      });
+      // alert("Failed to submit inquiry. Please check your network or try again later.")
+
     } finally {
       setSubmitting(false);
     }
   }
+
+  React.useEffect(() => {
+  if (message) {
+    const timer = setTimeout(() => setMessage(null), 4000);
+    return () => clearTimeout(timer);
+  }
+}, [message]);
+
 
   return (
     <section id="contact" className="py-20 bg-gray-50">
@@ -60,9 +109,9 @@ export default function QuoteForm() {
         <p className="text-gray-600 mb-10">Fast response • Fair value • Instant payment</p>
       </div> */}
 
-      <SectionHeading 
-      title="Get a Quote for Your Device"
-          subtitle="Fast response • Fair value • Instant payment"
+      <SectionHeading
+        title="Get a Quote for Your Device"
+        subtitle="Fast response • Fair value • Instant payment"
       />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -103,13 +152,15 @@ export default function QuoteForm() {
                 id="phone"
                 required
                 value={data.phone}
+                maxLength={10}
+                pattern="[0-9]{10}"
                 onChange={(e) => onChange('phone', e.target.value)}
                 className="w-full border border-gray-200 rounded-xl px-4 py-3 transition hover:border-orange-300 focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-200"
               />
             </div>
 
             <div>
-              <label htmlFor="deviceBrand" className="block text-sm font-semibold mb-1">Device Brand &amp; Model</label>
+              <label htmlFor="deviceBrand" className="block text-sm font-semibold mb-1">Device Brand </label>
               <input
                 id="deviceBrand"
                 required
@@ -118,9 +169,20 @@ export default function QuoteForm() {
                 className="w-full border border-gray-200 rounded-xl px-4 py-3 transition hover:border-orange-300 focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-200"
               />
             </div>
+            
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="deviceModel" className="block text-sm font-semibold mb-1">Device Model</label>
+              <input
+                id="deviceModel"
+                required
+                value={data.deviceModel}
+                onChange={(e) => onChange('deviceModel', e.target.value)}
+                className="w-full border border-gray-200 rounded-xl px-4 py-3 transition hover:border-orange-300 focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-200"
+              />
+            </div>
             <div>
               <label htmlFor="deviceCondition" className="block text-sm font-semibold mb-1">Device Condition</label>
               <select
@@ -139,11 +201,25 @@ export default function QuoteForm() {
             </div>
 
             <div>
-              <label htmlFor="imei" className="block text-sm font-semibold mb-1">IMEI Number</label>
+              <label htmlFor="imei_1" className="block text-sm font-semibold mb-1">IMEI Number 1</label>
               <input
-                id="imei"
-                value={data.imei}
-                onChange={(e) => onChange('imei', e.target.value)}
+                id="imei_1"
+                value={data.imei_1}
+                onChange={(e) => onChange('imei_1', e.target.value)}
+                maxLength={15}
+                pattern="[0-9]{15}"
+                className="w-full border border-gray-200 rounded-xl px-4 py-3 transition hover:border-orange-300 focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-200"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="imei_2" className="block text-sm font-semibold mb-1">IMEI Number 2</label>
+              <input
+                id="imei_2"
+                value={data.imei_2}
+                maxLength={15}
+                pattern="[0-9]{15}"
+                onChange={(e) => onChange('imei_2', e.target.value)}
                 className="w-full border border-gray-200 rounded-xl px-4 py-3 transition hover:border-orange-300 focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-200"
               />
             </div>
@@ -181,6 +257,15 @@ export default function QuoteForm() {
 
               {submitting ? 'Submitting...' : 'Get Instant Quote'}
             </button>
+
+            {message && (
+              <p
+                className={`mt-4 text-sm font-medium ${message.type === "success" ? "text-green-600" : "text-red-600"
+                  }`}
+              >
+                {message.text}
+              </p>
+            )}
           </div>
         </form>
       </div>

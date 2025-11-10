@@ -1,52 +1,85 @@
 // app/components/Faqs.tsx
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import faq from '@/assets/faq.png'
 import { FaTruck, FaIdCard, FaBoxes } from "react-icons/fa";
 import { MdPhoneAndroid, MdPaid } from "react-icons/md";
+import { FaTelegramPlane } from "react-icons/fa";
+import axios from 'axios';
+import { apiUrl } from '@/config';
 
-const faqs = [
-  {
-    icon: (
-      <MdPhoneAndroid className='w-5 h-5'/>
-    ),
-    q: 'Do you buy damaged or broken phones?',
-    a: 'Yes, we buy phones in all conditions — from brand new to broken. Just provide accurate details.',
-  },
-  {
-    icon: (
-      <MdPaid className='w-5 h-5'/>
-    ),
-    q: 'How will I get paid?',
-    a: 'Bank transfer, or instant cash  after verification.',
-  },
-  {
-    icon: (
-      <FaTruck className='w-5 h-5'/>
-    ),
-    q: 'Do you offer device pickup?',
-    a: 'Yes — we offer convenient nationwide doorstep pickup.',
-  },
-  {
-    icon: (
-      <FaIdCard className='w-5 h-5'/>
-    ),
-    q: 'What documents are required?',
-    a: 'A valid photo ID.',
-  },
-  {
-    icon: (
-      <FaBoxes className='w-5 h-5'/>
-    ),
-    q: 'Can I sell multiple devices at once?',
-    a: 'Absolutely — just list all devices when requesting a quote.',
-  },
-];
+// const faqs = [
+//   {
+//     icon: (
+//       <MdPhoneAndroid className='w-5 h-5'/>
+//     ),
+//     q: 'Do you buy damaged or broken phones?',
+//     a: 'Yes, we buy phones in all conditions — from brand new to broken. Just provide accurate details.',
+//   },
+//   {
+//     icon: (
+//       <MdPaid className='w-5 h-5'/>
+//     ),
+//     q: 'How will I get paid?',
+//     a: 'Bank transfer, or instant cash  after verification.',
+//   },
+//   {
+//     icon: (
+//       <FaTruck className='w-5 h-5'/>
+//     ),
+//     q: 'Do you offer device pickup?',
+//     a: 'Yes — we offer convenient nationwide doorstep pickup.',
+//   },
+//   {
+//     icon: (
+//       <FaIdCard className='w-5 h-5'/>
+//     ),
+//     q: 'What documents are required?',
+//     a: 'A valid photo ID.',
+//   },
+//   {
+//     icon: (
+//       <FaBoxes className='w-5 h-5'/>
+//     ),
+//     q: 'Can I sell multiple devices at once?',
+//     a: 'Absolutely — just list all devices when requesting a quote.',
+//   },
+// ];
+
+interface FaqItem {
+  faqid: number;
+  question: string;
+  answer: string;
+}
+
 
 export default function Faqs() {
+  const [faqs, setFaqs] = useState<FaqItem[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchFaqs =async () => {
+      try {
+        const response = await axios.post(`${apiUrl}/faqlist`)
+        if(response.data.success && Array.isArray(response.data.data)) {
+          setFaqs(response.data.data)
+        } else {
+          setError("Failed to load FAQs");
+        }
+      } catch (err) {
+        setError("Something went wrong while fetching FAQs.")
+      } finally {
+        setLoading(false)
+      }
+    };
+
+    fetchFaqs()
+  },[])
+
   return (
     <section id="faqs" className="py-16 bg-white">
       {/* Scoped helpers only */}
@@ -80,16 +113,27 @@ export default function Faqs() {
             </div>
           <p className="text-gray-600 mb-6">Got questions? We've got straight answers.</p>
 
-          <div className="space-y-4">
+          {/* Loading state */}
+          {loading && (
+            <p className="text-gray-500 text-center py-10">Loading FAQs...</p>
+          )}
+
+          {/* Error message */}
+          {error && (
+            <p className="text-red-500 text-center py-10">{error}</p>
+          )}
+          {
+            !loading && !error && faqs.length > 0 ? (
+              <div className="space-y-4">
             {faqs.map((f) => (
               <details
-                key={f.q}
+                key={f.faqid}
                 className="group border border-px-orange-60 rounded-2xl bg-white overflow-hidden transition-all open:border-px-orange"
               >
                 <summary className="flex items-center justify-between cursor-pointer font-medium px-5 py-5 text-gray-800 transition-all open:text-white open:grad-orange">
                   <span className="flex items-center gap-3">
-                    <span className="text-[#fb923c] group-open:text-white">{f.icon}</span>
-                    {f.q}
+                    {/* <span className="text-[#fb923c] group-open:text-white">{f.icon}</span> */}
+                    <FaTelegramPlane className="text-[#fb923c] group-open:text-white w-5 h-5" />{f.question}
                   </span>
                   <svg
                     className="w-4 h-4 transition-transform open:rotate-180 group-open:text-white"
@@ -106,11 +150,18 @@ export default function Faqs() {
                 </summary>
                 <div className="px-5 pb-5 pt-3 text-gray-600 open:text-white open:grad-orange">
                   
-                  {f.a}
+                  {f.answer}
                 </div>
               </details>
             ))}
           </div>
+            ) : (
+              !loading && !error && (
+                <p className='text-gray-500 text-center py-10'>No FAQs found.</p>
+              )
+            )
+          }
+          
 
           <div className="mt-8">
             <Link
