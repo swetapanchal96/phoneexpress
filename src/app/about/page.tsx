@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import SectionHeading from "../Components/SectionHeading";
 import { FaBolt, FaCog, FaHandshake, FaSmile } from "react-icons/fa";
-import aboutImg from '@/assets/about-img.png'
+import aboutImg from '@/assets/about-new.webp'
 import Breadcrumb from "../Components/Breadcrumb";
 
 

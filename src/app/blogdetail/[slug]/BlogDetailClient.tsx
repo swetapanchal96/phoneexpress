@@ -10,6 +10,7 @@ interface BlogData {
   blogTitle: string;
   slugname: string;
   blogDescription: string;
+  date: string;
   blogImage: string;
   metaTitle?: string;
   metaDescription?: string;
@@ -18,11 +19,11 @@ interface BlogData {
 }
 
 export default function BlogDetailPage({ slug }: { slug: string }) {
-//   const { slug } = useParams();
+  //   const { slug } = useParams();
   const [blog, setBlog] = useState<BlogData | null>(null);
   const [loading, setLoading] = useState(true);
-    console.log(slug,"sluggggg");
-    
+  console.log(slug, "sluggggg");
+
   useEffect(() => {
     if (!slug) return;
 
@@ -31,7 +32,7 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
         const res = await axios.post(`${apiUrl}/blog/details`,
           { slugname: slug }
         );
-        
+
         setBlog(res.data.data)
       } catch (err) {
         console.error("Error fetching blog details:", err);
@@ -75,7 +76,12 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
 
       {/* Author and Date */}
       <p className="text-gray-500 text-sm mb-6">
-        {/* {new Date(post.date).toLocaleDateString("en-GB") } */}
+        {new Date(blog.date).toLocaleDateString("en-GB", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        }).replace(/ /g, "-")}
+
       </p>
 
       {/* Banner Image */}
@@ -91,10 +97,10 @@ export default function BlogDetailPage({ slug }: { slug: string }) {
       </div>
 
       {/* Blog Content */}
-      <article className="prose prose-lg max-w-none text-gray-700" 
-      dangerouslySetInnerHTML={{__html: blog.blogDescription }}
+      <article className="prose prose-lg max-w-none text-gray-700"
+        dangerouslySetInnerHTML={{ __html: blog.blogDescription }}
       />
-        
+
     </main>
   );
 }

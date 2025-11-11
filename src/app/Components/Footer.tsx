@@ -6,20 +6,20 @@ import logo from "@/assets/logo.webp"
 
 export default function SiteFooter() {
   return (
-    <footer className="bg-linear-to-b from-[#111827] to-[#000000] text-gray-300">
+    <footer className="bg-white text-black border border-t">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-14 grid grid-cols-1 md:grid-cols-4 gap-10">
         {/* Logo + Social */}
         <div>
           <Link href='/'>
           <Image src={logo} alt="PhoneXpress" width={160} height={80} className="h-20 w-auto mb-4" />
           </Link>
-          <p className="text-sm text-gray-400">Turning devices into value with trust and transparency.</p>
+          <p className="text-sm text-black">Turning devices into value with trust and transparency.</p>
 
           <div className="mt-5 flex items-center gap-4 text-xl">
             <Link href="#" className="hover:text-[#FF7A2D] transition" aria-label="Facebook"><FaFacebookF /></Link>
-            <Link href="#" className="hover:text-[#FF7A2D] transition" aria-label="Twitter"><FaTwitter /></Link>
+            {/* <Link href="#" className="hover:text-[#FF7A2D] transition" aria-label="Twitter"><FaTwitter /></Link>
             <Link href="#" className="hover:text-[#FF7A2D] transition" aria-label="Instagram"><FaInstagram /></Link>
-            <Link href="#" className="hover:text-[#FF7A2D] transition" aria-label="LinkedIn"><FaLinkedinIn /></Link>
+            <Link href="#" className="hover:text-[#FF7A2D] transition" aria-label="LinkedIn"><FaLinkedinIn /></Link> */}
           </div>
         </div>
 
@@ -51,15 +51,15 @@ export default function SiteFooter() {
           <ul className="space-y-4 text-sm">
             <li className="flex items-start gap-3">
               <FaMapMarkerAlt className="text-[#FF7A2D] text-lg mt-0.5" />
-              <span>123 Express Lane, Sydney, NSW, Australia</span>
+              <span>Brisbane, Sydney, Melbourne</span>
             </li>
             <li className="flex items-center gap-3">
               <FaPhoneAlt className="text-[#FF7A2D] text-lg" />
-              <a href="tel:+61412345678" className="hover:text-[#FF7A2D] transition">+61 412 345 678</a>
+              <a href="tel:+61422794777" className="hover:text-[#FF7A2D] transition">+61 422 794 777</a>
             </li>
             <li className="flex items-center gap-3">
               <FaEnvelope className="text-[#FF7A2D] text-lg" />
-              <a href="mailto:support@phonexpress.com" className="hover:text-[#FF7A2D] transition">support@phonexpress.com</a>
+              <a href="mailto:Hello@phonexpress.com.au" className="hover:text-[#FF7A2D] transition">Hello@phonexpress.com.au</a>
             </li>
           </ul>
         </div>

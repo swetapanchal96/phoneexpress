@@ -61,7 +61,7 @@ export default function WhatWeBuy() {
                 </div>
                 <div>
                   <h4 className="text-lg font-medium transition-colors group-hover:text-[#ff7a2d]">Tablets & iPads</h4>
-                  <p className="text-sm text-gray-500">Apple iPad, Samsung Tab etc</p>
+                  <p className="text-sm text-gray-500">Apple iPad, Samsung Tab </p>
                 </div>
               </div>
 
