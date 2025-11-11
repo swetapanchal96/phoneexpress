@@ -6,7 +6,7 @@ import Image from "next/image";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import hero1 from '@/assets/hero-1.jpg'
+import hero1 from '@/assets/hero-1-new.webp'
 import hero2 from '@/assets/hero-2-new.webp'
 import hero3 from '@/assets/hero-3.jpg'
 // import { LuSmartphone } from "react-icons/lu";

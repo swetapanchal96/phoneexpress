@@ -1,7 +1,7 @@
 // app/components/QuoteForm.tsx
 'use client';
 import { FaTelegramPlane } from "react-icons/fa";
-
+import { useRouter } from "next/navigation";
 import React, { useState } from 'react';
 import SectionHeading from "./SectionHeading";
 import axios from "axios";
@@ -37,7 +37,7 @@ export default function QuoteForm() {
   const [data, setData] = useState<FormState>(initial);
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
-
+  const router = useRouter();
 
   function onChange<K extends keyof FormState>(key: K, val: FormState[K]) {
     setData((d) => ({ ...d, [key]: val }));
@@ -51,7 +51,7 @@ export default function QuoteForm() {
       const payload = {
         Customer_name: data.fullName,
         brand: data.deviceBrand,
-        model:data.deviceModel,
+        model: data.deviceModel,
         Customer_email: data.email,
         device_condition: data.deviceCondition,
         Customer_phone: data.phone,
@@ -71,6 +71,8 @@ export default function QuoteForm() {
         // alert(response.data.message);
         setMessage({ type: "success", text: response.data.message });
         setData(initial);
+
+        router.push('/thank-you')
       } else {
         // alert("Something went wrong. Please try again.")
         setMessage({ type: "error", text: "Something went wrong. Please try again." });
@@ -89,11 +91,11 @@ export default function QuoteForm() {
   }
 
   React.useEffect(() => {
-  if (message) {
-    const timer = setTimeout(() => setMessage(null), 4000);
-    return () => clearTimeout(timer);
-  }
-}, [message]);
+    if (message) {
+      const timer = setTimeout(() => setMessage(null), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [message]);
 
 
   return (
@@ -120,7 +122,7 @@ export default function QuoteForm() {
           onSubmit={onSubmit}
           className="bg-white p-10 rounded-3xl shadow-xl border border-orange-200 hover:border-px-orange transition duration-300 space-y-6"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
             <div>
               <label htmlFor="fullName" className="block text-sm font-semibold mb-1">Full Name</label>
               <input
@@ -131,7 +133,9 @@ export default function QuoteForm() {
                 className="w-full border border-gray-200 rounded-xl px-4 py-3 transition hover:border-orange-300 focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-200"
               />
             </div>
+          </div>
 
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label htmlFor="email" className="block text-sm font-semibold mb-1">Email</label>
               <input
@@ -143,9 +147,7 @@ export default function QuoteForm() {
                 className="w-full border border-gray-200 rounded-xl px-4 py-3 transition hover:border-orange-300 focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-200"
               />
             </div>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label htmlFor="phone" className="block text-sm font-semibold mb-1">Phone Number</label>
               <input
@@ -158,6 +160,10 @@ export default function QuoteForm() {
                 className="w-full border border-gray-200 rounded-xl px-4 py-3 transition hover:border-orange-300 focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-200"
               />
             </div>
+          </div>
+
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
             <div>
               <label htmlFor="deviceBrand" className="block text-sm font-semibold mb-1">Device Brand </label>
@@ -169,10 +175,7 @@ export default function QuoteForm() {
                 className="w-full border border-gray-200 rounded-xl px-4 py-3 transition hover:border-orange-300 focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-200"
               />
             </div>
-            
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label htmlFor="deviceModel" className="block text-sm font-semibold mb-1">Device Model</label>
               <input
@@ -201,6 +204,17 @@ export default function QuoteForm() {
             </div>
 
             <div>
+              <label htmlFor="expectedPrice" className="block text-sm font-semibold mb-1">Expected Price (Optional)</label>
+              <input
+                id="expectedPrice"
+                placeholder="$"
+                value={data.expectedPrice}
+                onChange={(e) => onChange('expectedPrice', e.target.value)}
+                className="w-full border border-gray-200 rounded-xl px-4 py-3 transition hover:border-orange-300 focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-200"
+              />
+            </div>
+
+            <div>
               <label htmlFor="imei_1" className="block text-sm font-semibold mb-1">IMEI Number 1</label>
               <input
                 id="imei_1"
@@ -224,16 +238,7 @@ export default function QuoteForm() {
               />
             </div>
 
-            <div>
-              <label htmlFor="expectedPrice" className="block text-sm font-semibold mb-1">Expected Price (Optional)</label>
-              <input
-                id="expectedPrice"
-                placeholder="$"
-                value={data.expectedPrice}
-                onChange={(e) => onChange('expectedPrice', e.target.value)}
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 transition hover:border-orange-300 focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-200"
-              />
-            </div>
+            
           </div>
 
           <div>
