@@ -10,6 +10,7 @@ import Faqs from "./Components/Faqs";
 import QuoteForm from "./Components/QuoteForm";
 import CtaBanner from "./Components/CtaBanner";
 import SiteFooter from "./Components/Footer";
+import DeviceConditionTabs from "./Components/DeviceCondition";
 
 
 export default function Home() {
@@ -24,6 +25,7 @@ export default function Home() {
       <Testimonials />
       <Faqs />
       <QuoteForm />
+      <DeviceConditionTabs />
       <CtaBanner />
       {/* <SiteFooter /> */}
     </div>

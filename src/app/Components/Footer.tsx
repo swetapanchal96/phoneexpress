@@ -16,10 +16,10 @@ export default function SiteFooter() {
           <p className="text-sm text-black">Turning devices into value with trust and transparency.</p>
 
           <div className="mt-5 flex items-center gap-4 text-xl">
-            <Link href="#" className="hover:text-[#FF7A2D] transition" aria-label="Facebook"><FaFacebookF /></Link>
-            {/* <Link href="#" className="hover:text-[#FF7A2D] transition" aria-label="Twitter"><FaTwitter /></Link>
-            <Link href="#" className="hover:text-[#FF7A2D] transition" aria-label="Instagram"><FaInstagram /></Link>
-            <Link href="#" className="hover:text-[#FF7A2D] transition" aria-label="LinkedIn"><FaLinkedinIn /></Link> */}
+            <Link href="https://www.facebook.com/profile.php?id=61583812107491" target="_blank" className="hover:text-[#FF7A2D] transition" aria-label="Facebook"><FaFacebookF /></Link>
+            {/* <Link href="#" className="hover:text-[#FF7A2D] transition" aria-label="Twitter"><FaTwitter /></Link> */}
+             <Link href="https://www.instagram.com/phone__xpress/?utm_source=ig_web_button_share_sheet" target="_blank" className="hover:text-[#FF7A2D] transition" aria-label="Instagram"><FaInstagram /></Link>
+            {/* <Link href="#" className="hover:text-[#FF7A2D] transition" aria-label="LinkedIn"><FaLinkedinIn /></Link> */}
           </div>
         </div>
 

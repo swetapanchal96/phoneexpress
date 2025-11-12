@@ -18,6 +18,9 @@ type FormState = {
   imei_2: string;
   expectedPrice?: string;
   message?: string;
+  pickup_date: string;
+  pickup_time: string;
+  address: string;
 };
 
 const initial: FormState = {
@@ -31,6 +34,9 @@ const initial: FormState = {
   expectedPrice: '',
   message: '',
   deviceModel: '',
+  pickup_date: '',
+  pickup_time: '',
+  address: ''
 };
 
 export default function QuoteForm() {
@@ -59,6 +65,9 @@ export default function QuoteForm() {
         imei_2: data.imei_2,
         expected_amt: data.expectedPrice,
         message: data.message,
+        pickup_date: data.pickup_date,
+        pickup_time: data.pickup_time,
+        address: data.address,
       }
 
       const response = await axios.post(`${apiUrl}/Customer_inquiry`, payload, {
@@ -162,7 +171,7 @@ export default function QuoteForm() {
             </div>
           </div>
 
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
             <div>
@@ -197,7 +206,7 @@ export default function QuoteForm() {
               >
                 <option value="" disabled>Select condition</option>
                 <option value="new">Brand New Sealed</option>
-                <option value="excellent">Excellent</option>
+                <option value="asnew">As New</option>
                 <option value="good">Good</option>
                 <option value="damaged">Damaged</option>
               </select>
@@ -238,7 +247,49 @@ export default function QuoteForm() {
               />
             </div>
 
-            
+            <div>
+              <label htmlFor="pickup_date" className="block text-sm font-semibold mb-1">
+                Pickup Date (Optional)
+              </label>
+              <input
+                id="pickup_date"
+                type="date"
+                value={data.pickup_date}
+                onChange={(e) => onChange("pickup_date", e.target.value)}
+                className="w-full border border-gray-200 rounded-xl px-4 py-3 transition hover:border-orange-300 focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-200"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="pickup_time" className="block text-sm font-semibold mb-1">
+                Pickup Time (Optional)
+              </label>
+              <input
+                id="pickup_time"
+                type="time"
+                required
+                value={data.pickup_time}
+                onChange={(e) => onChange("pickup_time", e.target.value)}
+                className="w-full border border-gray-200 rounded-xl px-4 py-3 transition hover:border-orange-300 focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-200"
+              />
+            </div>
+
+
+          </div>
+
+          <div>
+            <label htmlFor="address" className="block text-sm font-semibold mb-1">
+              Address (Optional)
+            </label>
+            <textarea
+              id="address"
+              required
+              rows={3}
+              value={data.address}
+              onChange={(e) => onChange("address", e.target.value)}
+              className="w-full border border-gray-200 rounded-xl px-4 py-3 transition hover:border-orange-300 focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-200"
+              placeholder="Enter your complete address"
+            />
           </div>
 
           <div>

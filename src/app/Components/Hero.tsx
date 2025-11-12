@@ -41,15 +41,15 @@ export default function Hero() {
             />
 
             {/* Orange overlay using ::before simulation */}
-           <div className="absolute inset-0 bg-linear-to-r from-orange-500/60 via-orange-400/50 to-orange-400/40 mix-blend-multiply z-2" />
+           <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/60 to-black/40 mix-blend-multiply z-2" />
 
 
             {/* Content overlay */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-black z-10 px-6 max-w-xl mx-auto">
-              <h3 className="text-3xl md:text-[48px] sm:text-3xl font-bold mb-3 drop-shadow-md">
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center  z-10 px-6 max-w-xl mx-auto">
+              <h3 className="text-3xl text-white md:text-[48px] sm:text-3xl font-bold mb-3 drop-shadow-md">
                 Instant Pay Xpress Way
               </h3>
-              <p className="text-center text-2xl sm:text-xl ">
+              <p className="text-center text-white text-2xl sm:text-xl ">
                 Australia&apos;s most trusted device buyers — instant payment, free pickup.
               </p>
             </div>
