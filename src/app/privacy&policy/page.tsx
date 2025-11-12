@@ -13,135 +13,84 @@ export default function PrivacyPolicy() {
         <h1 className="text-4xl my-5 text-center font-bold">Privacy Policy</h1>
 
         {/* 1. Introduction */}
-        <h3 className="text-xl font-semibold mt-6">1. Introduction</h3>
+        
         <p className="my-2">
-          At Phone Express, we value your privacy and are committed to protecting your personal
-          information. This Privacy Policy explains how we collect, use, and safeguard your data
-          when you use our website and services.
+          We know that the information on your phone is sensitive, so we take extra steps to make sure your device is erased and your personal data is removed from any device we receive.
         </p>
 
         {/* 2. Information We Collect */}
-        <h3 className="text-xl font-semibold mt-6">2. Information We Collect</h3>
-        <ul className="list-disc pl-6">
-          <li>
-            <strong>Personal Information:</strong> Name, email, phone number, address, and payment
-            details provided during registration or selling your device.
-          </li>
-          <li>
-            <strong>Device Information:</strong> Model, IMEI number, and condition of the devices
-            you sell or quote.
-          </li>
-          <li>
-            <strong>Technical Data:</strong> IP address, browser type, and pages visited for
-            analytics and security.
-          </li>
-        </ul>
+        
+        <p className="my-2">
+          During our testing procedure, our testing team will factory reset any device we receive twice, once at the beginning at once at the end. This process ensures that your data is removed before we test.
+        </p>
 
         {/* 3. How We Use Your Information */}
-        <h3 className="text-xl font-semibold mt-6">3. How We Use Your Information</h3>
-        <ul className="list-disc pl-6">
-          <li>To evaluate and process your device sale or quote request.</li>
-          <li>To verify ownership and prevent fraud.</li>
-          <li>To process payments and refunds securely.</li>
-          <li>To send updates, offers, or service notifications.</li>
-          <li>To improve website functionality and user experience.</li>
-        </ul>
+        <p className="my-2">
+          We still highly recommend that you back up and remove your <b> personal </b> data before you send your device.
+        </p>
 
         {/* 4. Data Sharing and Disclosure */}
-        <h3 className="text-xl font-semibold mt-6">4. Data Sharing and Disclosure</h3>
+        <p className="my-2">
+          Please see our page on how to erase your data before you ship it to us.
+        </p>
+
+        <div >
+        <h3 className="text-xl font-bold">How to Find Your Device’s IMEI Number?</h3>
+        <p className="my-2">
+          Part of the process will ask for your device’s IMEI number. If you don’t know where to find it, you may head over to this page for instructions.
+        </p>
+        </div>
+
+        <div>
+          <h3 className="text-lg font-bold">Removing Your Personal Data</h3>
+          <p className="my-2">Make sure that before you send us your devices, you get to make sure that you have done your initial checks and ensured that you have removed your personal data, have logged out and <br/>
+           <b> removed your iPhone, Google, or Samsung account</b> from the device.
+          </p>
+        </div>
+
+        <div >
+        <h3 className="text-xl font-bold">What’s the difference between the conditions?</h3>
         <ul className="list-disc pl-6">
-          <li>
-            We do <strong>not</strong> sell or rent your personal data to third parties.
-          </li>
-          <li>
-            We may share limited information with trusted service providers (e.g., payment gateways,
-            couriers) necessary for order fulfillment.
-          </li>
-          <li>
-            We may disclose information if required by law or to prevent fraud or illegal activity.
-          </li>
+          <li><b>As New </b> – These are phones that are in perfect condition. No scratches, no damage, no blemishes. It’s as if they have never been used.</li>
+          <li><b>Working </b> – This refers to phones that have some visible signs of use. It could be some scratches on the screen or minor wear & tear to the body of the device.</li>
+          <li><b>Dead </b> – As the name suggests, when the phone is beyond usable, it’s classified as dead. This includes the device being water damaged.</li>
         </ul>
+        </div>
 
-        {/* 5. Data Security */}
-        <h3 className="text-xl font-semibold mt-6">5. Data Security</h3>
+        <div className="mt-2">
+        <h3 className="text-xl font-bold">What happens if you find faults with the phone?</h3>
         <p className="my-2">
-          We use encryption, firewalls, and secure access controls to protect your personal data
-          from unauthorized access, alteration, or destruction. However, please note that no
-          electronic storage or transmission method is 100% secure.
+         We inspect and review every phone received. If we find that the phone is not as described, we will contact you and offer a reduced price. You can see under the ‘working’ condition exactly what the prices will be with varying amounts of damage to the phone.
         </p>
+        </div>
 
-        {/* 6. Cookies and Tracking */}
-        <h3 className="text-xl font-semibold mt-6">6. Cookies and Tracking</h3>
+        <div className="mt-2">
+        <h3 className="text-xl font-bold">Do the valuations change?</h3>
         <p className="my-2">
-          Our website uses cookies to improve user experience, analyze traffic, and remember your
-          preferences. You can disable cookies through your browser settings, but certain site
-          features may not function properly as a result.
+         The prices we offer do change, but usually they go down. The reason for this is because technology loses its value over time. We do however pride ourselves on offering more for your phone than anyone else in the market.
         </p>
+        </div>
 
-        {/* 7. Your Rights */}
-        <h3 className="text-xl font-semibold mt-6">7. Your Rights</h3>
-        <ul className="list-disc pl-6">
-          <li>Access, update, or delete your personal information.</li>
-          <li>Withdraw consent to marketing communications.</li>
-          <li>Request a copy of your stored data.</li>
-          <li>Opt-out of non-essential cookies or data tracking.</li>
-        </ul>
-
-        {/* 8. Data Retention */}
-        <h3 className="text-xl font-semibold mt-6">8. Data Retention</h3>
+        <div className="mt-2">
+        <h3 className="text-xl font-bold">How do I send my phone in?</h3>
         <p className="my-2">
-          We retain your personal data only as long as necessary to fulfill the purpose it was
-          collected for or as required by applicable law (e.g., tax, accounting, or legal
-          requirements).
+         We’ve worked hard to make the system safe, so once you register your phone on our website,<b> we will send you an Australia Post satchel</b> for you to send us your mobile phone in.<b> You can also go to the nearest post office </b> from your location and send it in immediately without having to wait for a satchel.  If you are based in Melbourne, then you are welcome to <b> drop your phone </b> off in person. We are centrally located in the Melbourne CBD and are always happy to meet you in person. Please note, all payments will be made via EFT or Cheque. We do not offer cash payments. For complete details on Shipping and Drop Off, you may visit this page.
         </p>
+        </div>
 
-        {/* 9. Third-Party Links */}
-        <h3 className="text-xl font-semibold mt-6">9. Third-Party Links</h3>
+        <div className="mt-2">
+        <h3 className="text-xl font-bold">What do our customers say?</h3>
         <p className="my-2">
-          Our website may contain links to external websites. We are not responsible for the privacy
-          practices or content of those third-party sites. Please review their respective privacy
-          policies before sharing your information.
+         We have bought phones from thousands of Australian customers, all of whom have been delighted with our service. You can view their feedback here (spoiler alert, it’s all positive).
         </p>
+        </div>
 
-        {/* 10. Children’s Privacy */}
-        <h3 className="text-xl font-semibold mt-6">10. Children’s Privacy</h3>
+        <div className="mt-2">
+        <h3 className="text-xl font-bold">How fast do you send the money?</h3>
         <p className="my-2">
-          Our services are not directed to children under the age of 18. We do not knowingly collect
-          personal data from minors. If you believe your child has provided us with personal data,
-          please contact us immediately for deletion.
+         This is what makes Mobile Monster the best. We inspect the phone and pay money into your account within 3-5 business days of receiving them. There’s no dilly-dallying around, we know you want your money, so our customer support team works hard to ensure we pay you immediately.
         </p>
-
-        {/* 11. Updates to This Policy */}
-        <h3 className="text-xl font-semibold mt-6">11. Updates to This Policy</h3>
-        <p className="my-2">
-          We may update or modify this Privacy Policy periodically to reflect changes in our
-          practices or legal requirements. The updated version will be posted on this page with a
-          “Last Updated” date. Continued use of our website implies your acceptance of the updated
-          policy.
-        </p>
-
-        {/* 12. Contact Us */}
-        <h3 className="text-xl font-semibold mt-6">12. Contact Us</h3>
-        <p className="my-2">
-          If you have any questions or concerns regarding this Privacy Policy or how we handle your
-          data, please contact us at:
-        </p>
-        <ul className="list-disc pl-6">
-          <li>
-            <strong>Email:</strong>{" "}
-            <a href="mailto:support@phoneexpress.com" className="text-blue-600 underline">
-              support@phoneexpress.com
-            </a>
-          </li>
-          <li>
-            <strong>Phone:</strong> +91-XXXXXXXXXX
-          </li>
-          <li>
-            <strong>Address:</strong> [Insert Business Address]
-          </li>
-        </ul>
-
-       
+        </div>
       </div>
     </main>
   );

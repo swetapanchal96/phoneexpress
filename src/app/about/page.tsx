@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import SectionHeading from "../Components/SectionHeading";
 import { FaBolt, FaCog, FaHandshake, FaSmile } from "react-icons/fa";
-import aboutImg from '@/assets/about-new.webp'
+import aboutImg from '@/assets/about-pge-new.webp'
 import Breadcrumb from "../Components/Breadcrumb";
 
 
@@ -17,7 +17,7 @@ export default function AboutPage() {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             {/* Left Image */}
-          <div className="relative h-72 sm:h-80 lg:h-96 rounded-2xl overflow-hidden shadow-lg">
+          <div className="relative h-72 sm:h-80 lg:h-100 rounded-2xl overflow-hidden shadow-lg">
             <Image
               src={aboutImg}
               alt="About PhoneXpress"

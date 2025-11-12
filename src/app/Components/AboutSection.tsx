@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { FaCheckCircle, FaHandshake, FaCog, FaBolt, FaSmile } from "react-icons/fa";
-import aboutImg from '@/assets/about-new.webp'
+import aboutImg from '@/assets/about-section.webp'
 import SectionHeading from "./SectionHeading";
 
 export default function AboutSection() {
