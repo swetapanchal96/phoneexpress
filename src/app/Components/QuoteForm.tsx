@@ -86,12 +86,9 @@ export default function QuoteForm() {
         // alert("Something went wrong. Please try again.")
         setMessage({ type: "error", text: "Something went wrong. Please try again." });
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error submitting form:", error);
-      setMessage({
-        type: "error",
-        text: "Failed to submit inquiry. Please check your network and try again.",
-      });
+      setMessage({ type: "error", text: error?.response?.data?.message });
       // alert("Failed to submit inquiry. Please check your network or try again later.")
 
     } finally {
@@ -101,7 +98,7 @@ export default function QuoteForm() {
 
   React.useEffect(() => {
     if (message) {
-      const timer = setTimeout(() => setMessage(null), 4000);
+      const timer = setTimeout(() => setMessage(null), 10000);
       return () => clearTimeout(timer);
     }
   }, [message]);
@@ -228,10 +225,23 @@ export default function QuoteForm() {
               <input
                 id="imei_1"
                 value={data.imei_1}
+
                 onChange={(e) => onChange('imei_1', e.target.value)}
                 maxLength={15}
+                minLength={15}
                 pattern="[0-9]{15}"
                 className="w-full border border-gray-200 rounded-xl px-4 py-3 transition hover:border-orange-300 focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-200"
+
+                onInvalid={(e) => {
+                  (e.target as HTMLInputElement).setCustomValidity(
+                    "IMEI number must be exactly 15 digits."
+                  );
+                }}
+
+                onInput={(e) => {
+                  (e.target as HTMLInputElement).setCustomValidity("");
+                }}
+
               />
             </div>
 
@@ -241,9 +251,21 @@ export default function QuoteForm() {
                 id="imei_2"
                 value={data.imei_2}
                 maxLength={15}
+                minLength={15}
                 pattern="[0-9]{15}"
                 onChange={(e) => onChange('imei_2', e.target.value)}
                 className="w-full border border-gray-200 rounded-xl px-4 py-3 transition hover:border-orange-300 focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-200"
+
+                onInvalid={(e) => {
+                  (e.target as HTMLInputElement).setCustomValidity(
+                    "IMEI number must be exactly 15 digits."
+                  );
+                }}
+
+                onInput={(e) => {
+                  (e.target as HTMLInputElement).setCustomValidity("");
+                }}
+
               />
             </div>
 
@@ -267,7 +289,7 @@ export default function QuoteForm() {
               <input
                 id="pickup_time"
                 type="time"
-                required
+
                 value={data.pickup_time}
                 onChange={(e) => onChange("pickup_time", e.target.value)}
                 className="w-full border border-gray-200 rounded-xl px-4 py-3 transition hover:border-orange-300 focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-200"
@@ -283,7 +305,7 @@ export default function QuoteForm() {
             </label>
             <textarea
               id="address"
-              required
+
               rows={3}
               value={data.address}
               onChange={(e) => onChange("address", e.target.value)}

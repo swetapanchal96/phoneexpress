@@ -165,7 +165,7 @@ export default function Faqs() {
 
           <div className="mt-8">
             <Link
-              href="#contact"
+              href="/contact"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#fb923c] text-white font-medium shadow"
             >
               Contact Us
